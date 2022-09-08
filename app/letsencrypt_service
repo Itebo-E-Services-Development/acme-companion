@@ -164,6 +164,12 @@ function update_cert {
         params_issue_arr+=(--ocsp-must-staple)
     fi
 
+    # Days
+    local -n days="ACME_${cid}_DAYS"
+    if [[ -z "$days" ]]; then
+        params_issue_arr+=(--days "$days")
+    fi
+
     local -n accountemail="LETSENCRYPT_${cid}_EMAIL"
     local config_home
     # If we don't have a LETSENCRYPT_EMAIL from the proxied container
